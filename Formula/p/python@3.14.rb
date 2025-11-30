@@ -325,6 +325,9 @@ class PythonAT314 < Formula
     mv bin/"wheel", bin/"wheel#{version.major_minor}"
     bin.install_symlink "wheel#{version.major_minor}" => "wheel3" unless altinstall?
 
+    # Ensure that our new pip wheel is globally readable.
+    chmod "ugo+r" lib_cellar.glob("ensurepip/_bundled/pip-*.whl")
+
     # Install unversioned (and for an altinstall, major-versioned) symlinks in libexec/bin.
     {
       "pip"   => "pip#{version.major_minor}",
